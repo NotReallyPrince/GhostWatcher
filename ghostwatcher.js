@@ -125,6 +125,11 @@
       #${panelId} .gw-icon-btn:hover { background: rgba(0,0,0,.06); }
       #${panelId}.gw-dark .gw-icon-btn:hover { background: rgba(255,255,255,.1); }
       #${panelId} .gw-icon-btn:disabled { opacity: .35; cursor: not-allowed; }
+      #${panelId} .gw-ico { width: 17px; height: 17px; display: block; }
+      /* theme toggle: show moon in light mode, sun in dark mode */
+      #${panelId} .gw-theme .gw-ico-sun { display: none; }
+      #${panelId}.gw-dark .gw-theme .gw-ico-moon { display: none; }
+      #${panelId}.gw-dark .gw-theme .gw-ico-sun { display: block; }
 
       /* ---- Loading ---- */
       #${panelId} .gw-loading { padding: 28px 18px 24px; }
@@ -287,6 +292,104 @@
       #${panelId}.gw-dark .gw-footer { border-color: #262626; }
       #${panelId} .gw-footer-status { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       #${panelId} .gw-credit { font-weight: 700; color: #d6249f; white-space: nowrap; }
+
+      /* ---- Tab base (icon + label, used by both layouts) ---- */
+      #${panelId} .gw-tab { display: flex; align-items: center; justify-content: center; gap: 6px; }
+      #${panelId} .gw-tab-ico { display: none; flex-shrink: 0; }
+      #${panelId} .gw-tab-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+      /* SidebarTrigger lives in the header, but only matters in fullscreen */
+      #${panelId} .gw-sbtrigger { display: none; }
+      #${panelId}.gw-fullscreen .gw-sbtrigger { display: flex; }
+
+      /* =====================================================
+         FULLSCREEN DASHBOARD — shadcn-style collapsible sidebar
+         ===================================================== */
+      #${panelId}.gw-fullscreen {
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw; height: 100vh; max-height: 100vh;
+        border: 0; border-radius: 0; box-shadow: none; animation: none;
+      }
+      #${panelId}.gw-fullscreen .gw-head { padding: 14px 20px; }
+
+      /* center the loading state when fullscreen */
+      #${panelId}.gw-fullscreen .gw-loading:not(.hidden) {
+        flex: 1; display: flex; flex-direction: column;
+        justify-content: center; align-items: center;
+      }
+      #${panelId}.gw-fullscreen .gw-track { width: min(420px, 60vw); }
+
+      /* body becomes [sidebar | main] dashboard grid */
+      #${panelId}.gw-fullscreen .gw-body {
+        --gw-sb: 264px;
+        display: grid;
+        grid-template-columns: var(--gw-sb) minmax(0, 1fr);
+        grid-template-rows: auto auto auto 1fr;
+        grid-template-areas:
+          "stats   search"
+          "tabs    list"
+          "actions list"
+          "footer  list";
+        min-height: 0;
+        transition: grid-template-columns .2s ease;
+        background:
+          linear-gradient(90deg,
+            #fafafa 0, #fafafa calc(var(--gw-sb) - 1px),
+            #dbdbdb calc(var(--gw-sb) - 1px), #dbdbdb var(--gw-sb),
+            transparent var(--gw-sb));
+      }
+      #${panelId}.gw-fullscreen.gw-dark .gw-body {
+        background:
+          linear-gradient(90deg,
+            #0a0a0a 0, #0a0a0a calc(var(--gw-sb) - 1px),
+            #262626 calc(var(--gw-sb) - 1px), #262626 var(--gw-sb),
+            transparent var(--gw-sb));
+      }
+
+      /* place each child into the grid */
+      #${panelId}.gw-fullscreen .gw-stats { grid-area: stats; }
+      #${panelId}.gw-fullscreen .gw-tabs {
+        grid-area: tabs; flex-direction: column; gap: 2px;
+        border-bottom: 0; padding: 8px; overflow-y: auto;
+      }
+      #${panelId}.gw-fullscreen .gw-actions {
+        grid-area: actions; flex-direction: column; gap: 7px; padding: 8px 12px 12px;
+      }
+      #${panelId}.gw-fullscreen .gw-footer {
+        grid-area: footer; align-self: end; flex-direction: column;
+        align-items: flex-start; gap: 4px;
+      }
+      #${panelId}.gw-fullscreen .gw-search-wrap { grid-area: search; padding: 14px 18px; }
+      #${panelId}.gw-fullscreen .gw-list {
+        grid-area: list; max-height: none; height: 100%;
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-auto-rows: max-content; align-content: start;
+        gap: 2px 14px; padding: 6px 18px 18px;
+      }
+      #${panelId}.gw-fullscreen .gw-empty { grid-column: 1 / -1; }
+
+      /* tabs render as a vertical SidebarMenu */
+      #${panelId}.gw-fullscreen .gw-tab {
+        flex: none; justify-content: flex-start; gap: 11px;
+        padding: 9px 12px; border-radius: 8px; border-bottom: 0;
+      }
+      #${panelId}.gw-fullscreen .gw-tab:hover:not(.active) { background: rgba(0,0,0,.05); }
+      #${panelId}.gw-fullscreen.gw-dark .gw-tab:hover:not(.active) { background: rgba(255,255,255,.06); }
+      #${panelId}.gw-fullscreen .gw-tab.active {
+        background: rgba(0,149,246,.12); color: #0095f6; border-bottom: 0;
+      }
+      #${panelId}.gw-fullscreen .gw-tab-ico {
+        display: inline-flex; justify-content: center; width: 20px; font-size: 15px;
+      }
+
+      /* collapsed → "icon" rail (cmd/ctrl+B) */
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-body { --gw-sb: 60px; }
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-stats,
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-actions,
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-footer { display: none; }
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-tab-label { display: none; }
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-tab { justify-content: center; padding: 10px 0; }
+      #${panelId}.gw-fullscreen.gw-sb-collapsed .gw-tab-ico { width: auto; }
     `;
     document.head.appendChild(style);
   }
@@ -305,6 +408,7 @@
     if (prefersDark) panel.classList.add("gw-dark");
     panel.innerHTML = `
       <div class="gw-head">
+        <button class="gw-icon-btn gw-sbtrigger" title="Toggle sidebar (Ctrl/⌘ B)">☰</button>
         <div class="gw-brand">
           <div class="gw-logo">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -319,7 +423,11 @@
           </div>
         </div>
         <div class="gw-head-actions">
-          <button class="gw-icon-btn gw-theme" title="Toggle theme">◐</button>
+          <button class="gw-icon-btn gw-fs" title="Fullscreen dashboard">⤢</button>
+          <button class="gw-icon-btn gw-theme" title="Toggle theme">
+            <svg class="gw-ico gw-ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="gw-ico gw-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
           <button class="gw-icon-btn gw-refresh" title="Refresh">↺</button>
           <button class="gw-icon-btn gw-close" title="Close">✕</button>
         </div>
@@ -342,7 +450,35 @@
       </div>
     `;
 
+    // ----- Fullscreen dashboard + collapsible sidebar (shadcn-style) -----
+    const fsBtn = panel.querySelector(".gw-fs");
+    const toggleFullscreen = (force) => {
+      const on = panel.classList.toggle("gw-fullscreen", force);
+      if (!on) panel.classList.remove("gw-sb-collapsed");
+      fsBtn.textContent = on ? "⤡" : "⤢";
+      fsBtn.title = on ? "Exit fullscreen" : "Fullscreen dashboard";
+    };
+    const toggleSidebar = () => {
+      if (panel.classList.contains("gw-fullscreen")) {
+        panel.classList.toggle("gw-sb-collapsed");
+      }
+    };
+
+    // cmd/ctrl+B toggles the sidebar, Esc exits fullscreen — only while in fullscreen
+    const onKeydown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "b" || e.key === "B")) {
+        if (panel.classList.contains("gw-fullscreen")) {
+          e.preventDefault();
+          toggleSidebar();
+        }
+      } else if (e.key === "Escape" && panel.classList.contains("gw-fullscreen")) {
+        toggleFullscreen(false);
+      }
+    };
+    document.addEventListener("keydown", onKeydown);
+
     panel.querySelector(".gw-close").addEventListener("click", () => {
+      document.removeEventListener("keydown", onKeydown);
       panel.remove();
       window.__ghostWatcherRunning__ = false;
     });
@@ -350,6 +486,8 @@
     panel.querySelector(".gw-theme").addEventListener("click", () => {
       panel.classList.toggle("gw-dark");
     });
+    fsBtn.addEventListener("click", () => toggleFullscreen());
+    panel.querySelector(".gw-sbtrigger").addEventListener("click", toggleSidebar);
 
     document.body.appendChild(panel);
     return panel;
@@ -434,11 +572,11 @@
     const privateUsers = [...privateSet].sort((a, b) => a.localeCompare(b));
 
     const tabs = [
-      { key: "nonFollowers", label: "Don't follow back", list: notFollowBack },
-      { key: "followers", label: "Followers", list: followers },
-      { key: "following", label: "Following", list: following },
-      { key: "verified", label: "Verified", list: verifiedUsers },
-      { key: "private", label: "Private", list: privateUsers },
+      { key: "nonFollowers", label: "Don't follow back", icon: "👻", list: notFollowBack },
+      { key: "followers", label: "Followers", icon: "👥", list: followers },
+      { key: "following", label: "Following", icon: "➡️", list: following },
+      { key: "verified", label: "Verified", icon: "✔️", list: verifiedUsers },
+      { key: "private", label: "Private", icon: "🔒", list: privateUsers },
     ];
 
     // Stats
@@ -542,8 +680,11 @@
       tabs.forEach((tab) => {
         const btn = document.createElement("button");
         btn.className = "gw-tab" + (tab.key === activeKey ? " active" : "");
-        btn.textContent = tab.label + " (" + tab.list.length + ")";
-        btn.title = tab.label + " (" + tab.list.length + ")";
+        const label = tab.label + " (" + tab.list.length + ")";
+        btn.innerHTML =
+          '<span class="gw-tab-ico">' + tab.icon + "</span>" +
+          '<span class="gw-tab-label">' + label + "</span>";
+        btn.title = label;
         btn.addEventListener("click", () => {
           activeKey = tab.key;
           renderTabs();
