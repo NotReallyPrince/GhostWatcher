@@ -22,32 +22,41 @@ No data leaves your browser. Everything runs locally in your own logged-in sessi
 
 ## 🚀 How to use
 
-### Option A — Quick paste (easiest)
+The simplest way is the **install page** — it walks you through every method with one-click copy buttons:
+
+### 👉 [notreallyprince.is-a.dev/GhostWatcher/install.html](https://notreallyprince.is-a.dev/GhostWatcher/install.html)
+
+> ⚠️ The old "fetch + eval" loader snippet **no longer works** — Instagram's Content-Security-Policy blocks loading external scripts at runtime. The methods below embed the script directly, so they run reliably.
+
+There are three ways to launch GhostWatcher — pick whichever suits you.
+
+### Method 1 — Drag to bookmarks bar *(recommended)*
+
+1. Open the [install page](https://notreallyprince.is-a.dev/GhostWatcher/install.html).
+2. Show your **bookmarks bar** — `Ctrl/⌘ + Shift + B`.
+3. **Drag** the black **GhostWatcher** button onto the bar — *don't click it, drag it.*
+4. Open [instagram.com](https://www.instagram.com/) and **log in**, then click your new **GhostWatcher** bookmark.
+
+> 💡 Dragging copies the whole bookmark perfectly. Pasting long bookmark text can get silently truncated — the usual reason a bookmarklet "doesn't work."
+
+### Method 2 — Copy the bookmarklet *(mobile-friendly)*
+
+1. On the [install page](https://notreallyprince.is-a.dev/GhostWatcher/install.html), tap **Copy bookmarklet**.
+2. Create a new bookmark (on any page), then **edit** it.
+3. Replace its **URL / address** with what you copied, and save.
+4. On Instagram (logged in), open that bookmark to run GhostWatcher.
+
+### Method 3 — Paste in the console *(always works)*
 
 1. Open [instagram.com](https://www.instagram.com/) and **log in**.
 2. Open the **DevTools Console**:
-   - **Windows / Linux:** press `F12` or `Ctrl + Shift + J`
-   - **Mac:** press `⌘ + Option + J`
-   - …or right-click anywhere on the page → **Inspect** → **Console** tab.
-3. Paste the snippet below and press **Enter**:
+   - **Windows / Linux:** `F12` or `Ctrl + Shift + J`
+   - **Mac:** `⌘ + Option + J`
+   - …or right-click the page → **Inspect** → **Console** tab.
+3. If your browser warns about pasting, type **`allow pasting`** and press Enter once.
+4. On the [install page](https://notreallyprince.is-a.dev/GhostWatcher/install.html), tap **Copy full script**, paste it into the console, and press **Enter**.
 
-```js
-(async()=>{const url="https://cdn.jsdelivr.net/gh/notreallyprince/ghostwatcher@main/ghostwatcher.js";try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const c=await r.text();(0,eval)(c)}catch(e){console.error("[GhostWatcher] Loader failed:",e);alert("GhostWatcher failed to load. Check console.")}})();
-```
-
-4. The GhostWatcher overlay appears in the top-right. Use the tabs to browse, the search box to filter, and the checkboxes to select accounts to unfollow.
-
-> 💡 If your browser warns you about pasting code into the console, type **`allow pasting`** and press Enter once, then paste the snippet.
-
-### Option B — One-click bookmarklet
-
-Run GhostWatcher with a single click, every time:
-
-1. Show your browser's **bookmarks bar** (`Ctrl/⌘ + Shift + B`).
-2. Right-click the bar → **Add page** / **Add bookmark**.
-3. Name it **GhostWatcher**.
-4. In the **URL** field, paste the entire line from [`bookmarklet.txt`](./bookmarklet.txt).
-5. Save. Now, whenever you're on Instagram (logged in), just click the **GhostWatcher** bookmark.
+The GhostWatcher overlay appears in the top-right. Use the tabs to browse, the search box to filter, the **fullscreen** button (`⤢`) to expand into a full dashboard, and the checkboxes to select accounts to unfollow.
 
 ---
 
@@ -63,7 +72,8 @@ Run GhostWatcher with a single click, every time:
 
 - **Search** any list with the search box.
 - **Select all / Clear / Unfollow** buttons appear on the *Don't follow back* tab for bulk actions.
-- Toggle **light/dark mode** with the ◐ button, or **refresh** your data with ↺.
+- Go **fullscreen** with the `⤢` button for a dashboard layout with a collapsible sidebar (toggle it with `☰` or `Ctrl/⌘ + B`; press `Esc` to exit fullscreen).
+- Toggle **light/dark mode** with the sun/moon button, or **refresh** your data with `↺`.
 
 ---
 
