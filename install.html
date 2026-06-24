@@ -6,13 +6,17 @@
 <meta name="description" content="GhostWatcher — find who doesn't follow you back on Instagram. Free, open-source, runs in your browser. By Prince Script.">
 <title>GhostWatcher · Install</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         fontFamily: {
-          sans: ['-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif'],
+          sans: ['Inter','-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif'],
+          serif: ['"Instrument Serif"','serif'],
         },
         colors: {
           ig: {
@@ -38,6 +42,8 @@
   }
 </script>
 <style>
+  * { font-family: 'Inter', sans-serif; }
+  .serif-accent { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
   .brand-gradient { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
   .brand-text {
     background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
@@ -50,125 +56,180 @@
   code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 </style>
 </head>
-<body class="bg-ig-surface text-ig-text font-sans antialiased">
+<body class="min-h-screen bg-white text-ig-text font-sans antialiased p-3 sm:p-4 md:p-6">
 
-<!-- ============ TOP NAV (Instagram-style sticky header) ============ -->
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ig-border">
-  <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-    <div class="flex items-center gap-2.5">
-      <div class="w-8 h-8 rounded-[9px] brand-gradient grid place-items-center text-lg shadow-sm">👻</div>
-      <span class="text-xl font-semibold tracking-tight">GhostWatcher</span>
-    </div>
-    <nav class="hidden sm:flex items-center gap-6 text-sm font-medium">
-      <a href="#install" class="hover:text-ig-blue transition">Install</a>
-      <a href="#how" class="hover:text-ig-blue transition">How it works</a>
-      <a href="#features" class="hover:text-ig-blue transition">Features</a>
-      <a href="https://github.com/notreallyprince/ghostwatcher" target="_blank" rel="noreferrer"
-         class="inline-flex items-center gap-1.5 bg-ig-text text-white px-3.5 py-1.5 rounded-lg hover:opacity-90 transition">
-        <svg viewBox="0 0 24 24" width="16" height="16" class="w-4 h-4" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.7c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-        GitHub
+<!-- ============ HERO (full-screen video-background card) ============ -->
+<section class="relative rounded-2xl sm:rounded-3xl overflow-hidden
+                min-h-[calc(100vh-24px)] sm:min-h-[calc(100vh-32px)] md:min-h-[calc(100vh-48px)] lg:h-[calc(100vh-48px)]">
+  <!-- background video -->
+  <video autoplay muted loop playsinline
+         class="absolute inset-0 w-full h-full object-cover"
+         poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23111'/%3E%3C/svg%3E">
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260602_150901_c45b90ec-18d7-42ff-90e2-b95d7109e330.mp4" type="video/mp4">
+  </video>
+  <!-- legibility scrim -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/40"></div>
+
+  <!-- content layer -->
+  <div class="relative z-10 flex flex-col
+              min-h-[calc(100vh-24px)] sm:min-h-[calc(100vh-32px)] md:min-h-[calc(100vh-48px)] lg:h-full
+              p-4 sm:p-6 md:p-8 gap-6">
+
+    <!-- navbar pill -->
+    <nav class="bg-white/60 backdrop-blur-md rounded-2xl shadow-sm pl-3 sm:pl-4 pr-2 py-2 w-full sm:w-auto flex items-center gap-3 sm:gap-6">
+      <a href="#" class="flex items-center gap-2 shrink-0">
+        <span class="w-8 h-8 rounded-[9px] brand-gradient grid place-items-center text-lg shadow-sm">👻</span>
+        <span class="text-gray-900 font-semibold tracking-tight whitespace-nowrap">GhostWatcher</span>
       </a>
-    </nav>
-  </div>
-</header>
-
-<!-- ============ HERO ============ -->
-<section class="relative overflow-hidden">
-  <div class="brand-gradient absolute inset-0 opacity-[0.07]"></div>
-  <div class="relative max-w-5xl mx-auto px-4 pt-14 pb-12 text-center">
-    <div class="text-7xl sm:text-8xl animate-floaty mb-4 select-none">👻</div>
-    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">
-      See who doesn't <span class="brand-text">follow you back</span>
-    </h1>
-    <p class="mt-4 text-base sm:text-lg text-ig-subtle max-w-2xl mx-auto leading-relaxed">
-      GhostWatcher is a free, open-source tool that reveals your Instagram non-followers,
-      browses your followers, verified & private accounts, and lets you unfollow safely —
-      right inside your browser. <span class="text-ig-text font-medium">No password. No servers. Nothing leaves your device.</span>
-    </p>
-    <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-      <a href="#install" class="bg-ig-blue text-white font-semibold px-6 py-3 rounded-lg hover:bg-ig-bluehover transition shadow-sm shadow-ig-blue/30">
+      <div class="hidden sm:flex items-center gap-5">
+        <a href="#how" class="text-gray-800 text-sm font-medium hover:opacity-60 transition-opacity whitespace-nowrap">How it works</a>
+        <a href="#install" class="text-gray-800 text-sm font-medium hover:opacity-60 transition-opacity whitespace-nowrap">Install</a>
+        <a href="#features" class="text-gray-800 text-sm font-medium hover:opacity-60 transition-opacity whitespace-nowrap">Features</a>
+        <a href="#faq" class="text-gray-800 text-sm font-medium hover:opacity-60 transition-opacity whitespace-nowrap">FAQ</a>
+      </div>
+      <a href="#install"
+         class="ml-auto bg-black text-white text-sm font-medium px-4 sm:px-5 py-2 rounded-xl hover:bg-gray-800 transition-colors whitespace-nowrap">
         Install now
       </a>
-      <a href="#how" class="bg-white border border-ig-border font-semibold px-6 py-3 rounded-lg hover:bg-ig-surface transition">
-        See how it works
-      </a>
-    </div>
-    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-ig-subtle">
-      <span class="inline-flex items-center gap-1.5"><span class="text-green-500">●</span> 100% client-side</span>
-      <span class="inline-flex items-center gap-1.5"><span class="text-green-500">●</span> Open source (MIT)</span>
-      <span class="inline-flex items-center gap-1.5"><span class="text-green-500">●</span> No install for IG</span>
-      <span class="inline-flex items-center gap-1.5"><span class="text-green-500">●</span> Light & dark mode</span>
+    </nav>
+
+    <!-- spacer -->
+    <div class="flex-1 min-h-[2rem]"></div>
+
+    <!-- bottom row: headline + card -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+
+      <!-- headline -->
+      <p class="text-white text-3xl sm:text-4xl xl:text-5xl font-medium leading-tight drop-shadow-lg lg:max-w-lg xl:max-w-2xl shrink-0">
+        See who doesn't<br />
+        follow you <span class="serif-accent">back</span>
+        <span class="block mt-4 text-sm sm:text-base font-normal text-white/80 max-w-md drop-shadow">
+          A free, open-source tool that reveals your Instagram non-followers and lets you unfollow safely — right in your browser. No password. No servers.
+        </span>
+      </p>
+
+      <!-- install card (right) -->
+      <div class="w-full lg:w-[min(480px,45%)] shrink-0">
+        <div class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden p-4 sm:p-6 flex flex-col gap-4">
+
+          <h2 class="text-xl sm:text-2xl font-semibold text-black tracking-tight">Get GhostWatcher 👻</h2>
+
+          <!-- repo + socials row -->
+          <div class="flex flex-row items-center justify-between gap-3 bg-gray-50 rounded-2xl px-4 py-2.5">
+            <div class="min-w-0">
+              <p class="text-[11px] text-gray-500 leading-tight">Free &amp; open source</p>
+              <a href="https://github.com/notreallyprince/ghostwatcher" target="_blank" rel="noreferrer"
+                 class="text-blue-600 font-semibold hover:underline truncate block">notreallyprince/ghostwatcher</a>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <a href="https://github.com/notreallyprince/ghostwatcher" target="_blank" rel="noreferrer"
+                 class="w-8 h-8 rounded-xl flex items-center justify-center bg-gray-100 text-gray-800 hover:opacity-80 transition-opacity" title="GitHub">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.7c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+              </a>
+              <a href="https://github.com/notreallyprince/ghostwatcher/blob/main/LICENSE" target="_blank" rel="noreferrer"
+                 class="w-8 h-8 rounded-xl flex items-center justify-center bg-green-100 text-green-600 hover:opacity-80 transition-opacity" title="MIT License">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              </a>
+              <span class="w-8 h-8 rounded-xl flex items-center justify-center bg-pink-100 text-pink-500" title="100% client-side">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- OR divider -->
+          <div class="flex items-center gap-3">
+            <div class="flex-1 h-px bg-gray-200"></div>
+            <span class="text-gray-400 font-medium text-sm">OR</span>
+            <div class="flex-1 h-px bg-gray-200"></div>
+          </div>
+
+          <!-- install methods -->
+          <div class="flex flex-col gap-3">
+            <p class="text-sm font-medium text-black">Pick how you'd like to install</p>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="#install" class="text-xs font-medium px-3 py-2 rounded-lg border bg-gray-100 text-black border-black transition-all">Drag &amp; drop</a>
+              <a href="#install" class="text-xs font-medium px-3 py-2 rounded-lg border bg-white text-gray-700 border-gray-200 hover:border-gray-400 transition-all">Bookmarklet</a>
+              <a href="#install" class="text-xs font-medium px-3 py-2 rounded-lg border bg-white text-gray-700 border-gray-200 hover:border-gray-400 transition-all">Console paste</a>
+            </div>
+            <a href="#install"
+               class="w-full bg-black text-white text-sm font-semibold py-3 rounded-2xl hover:bg-gray-800 transition-colors text-center">
+              See the install methods
+            </a>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-gray-500">
+              <span class="inline-flex items-center gap-1"><span class="text-green-500">●</span> 100% client-side</span>
+              <span class="inline-flex items-center gap-1"><span class="text-green-500">●</span> No password</span>
+              <span class="inline-flex items-center gap-1"><span class="text-green-500">●</span> Open source (MIT)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ============ "STORIES" STRIP (feature highlights, IG stories vibe) ============ -->
-<section id="features" class="max-w-5xl mx-auto px-4 pb-6">
-  <div class="flex gap-4 overflow-x-auto no-sb py-2">
-    <!-- each "story" -->
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">🔍</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Non-<br>followers</p>
+<!-- ============ FEATURES (clean card grid) ============ -->
+<section id="features" class="max-w-5xl mx-auto px-4 pt-16 pb-6">
+  <div class="text-center mb-8">
+    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900">Everything you need</h2>
+    <p class="mt-2 text-sm text-gray-500">One overlay. Every list. All running locally in your browser.</p>
+  </div>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">🔍</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Non-followers</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">See exactly who doesn't follow you back.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">👥</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Followers</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">👥</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Followers</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Browse your full followers list, sorted.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">✅</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Verified</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">✅</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Verified</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Filter the verified accounts you follow.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">🔒</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Private</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">🔒</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Private</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Spot the private accounts at a glance.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">⚡</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Bulk<br>unfollow</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">⚡</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Bulk unfollow</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Select many and unfollow in one go.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">🐢</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Safe<br>pacing</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">🐢</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Safe pacing</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Human-like delays to reduce risk.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">🌗</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Dark<br>mode</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">🌗</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Dark mode</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Matches Instagram's light & dark themes.</p>
     </div>
-    <div class="shrink-0 w-20 text-center">
-      <div class="w-[66px] h-[66px] mx-auto rounded-full ig-ring p-[3px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center text-2xl">🔎</div>
-      </div>
-      <p class="mt-1.5 text-[11px] font-medium leading-tight">Search</p>
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition">
+      <div class="w-11 h-11 rounded-xl bg-gray-50 grid place-items-center text-xl">🔎</div>
+      <p class="mt-3 font-semibold text-sm text-gray-900">Search</p>
+      <p class="mt-0.5 text-xs text-gray-500 leading-relaxed">Instantly filter any list by username.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ CSP EXPLAINER (info card) ============ -->
-<section id="how" class="max-w-2xl mx-auto px-4 pt-8 pb-2">
-  <div class="bg-white border border-ig-border rounded-xl p-5 sm:p-6">
-    <div class="flex items-start gap-3">
-      <div class="shrink-0 w-9 h-9 rounded-full bg-blue-50 grid place-items-center text-lg">💡</div>
+<section id="how" class="max-w-2xl mx-auto px-4 pt-10 pb-2">
+  <div class="bg-gray-50 border border-gray-200 rounded-3xl p-5 sm:p-6">
+    <div class="flex items-start gap-3.5">
+      <div class="shrink-0 w-10 h-10 rounded-xl bg-white border border-gray-200 grid place-items-center text-lg">💡</div>
       <div>
-        <h3 class="font-semibold text-[15px]">How does GhostWatcher run?</h3>
-        <p class="mt-1.5 text-sm text-ig-subtle leading-relaxed">
+        <h3 class="font-semibold text-[15px] text-gray-900">How does GhostWatcher run?</h3>
+        <p class="mt-1.5 text-sm text-gray-500 leading-relaxed">
           Instagram blocks websites from loading outside code (a security rule called
-          <span class="font-medium text-ig-text">Content-Security-Policy</span>). So GhostWatcher can't be a tiny link —
+          <span class="font-medium text-gray-900">Content-Security-Policy</span>). So GhostWatcher can't be a tiny link —
           it runs as one self-contained piece, directly in your browser. The methods below are built for exactly that.
-          Pick whichever feels easiest. <span class="font-medium text-ig-text">Method 1 is the smoothest.</span>
+          Pick whichever feels easiest. <span class="font-medium text-gray-900">Method 1 is the smoothest.</span>
         </p>
       </div>
     </div>
@@ -178,16 +239,16 @@
 <!-- ============ INSTALL METHODS ============ -->
 <section id="install" class="max-w-2xl mx-auto px-4 py-8 space-y-7">
 
-  <h2 class="text-center text-2xl font-bold tracking-tight">Three ways to install</h2>
-  <p class="text-center text-sm text-ig-subtle -mt-4">All free. All run locally. Choose one.</p>
+  <div class="text-center">
+    <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900">Three ways to install</h2>
+    <p class="mt-2 text-sm text-gray-500">All free. All run locally. Choose one.</p>
+  </div>
 
   <!-- ===== METHOD 1: DRAG & DROP (post-style card) ===== -->
-  <article class="bg-white border border-ig-border rounded-xl overflow-hidden animate-fadeup">
+  <article class="bg-white border border-gray-200 rounded-3xl overflow-hidden animate-fadeup shadow-sm">
     <!-- post header -->
-    <div class="flex items-center gap-3 px-4 py-3 border-b border-ig-border">
-      <div class="w-9 h-9 rounded-full ig-ring p-[2px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center font-bold text-sm">1</div>
-      </div>
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-100">
+      <div class="w-9 h-9 rounded-xl bg-black grid place-items-center font-bold text-sm text-white shrink-0">1</div>
       <div class="leading-tight">
         <p class="font-semibold text-sm">Drag &amp; drop bookmark</p>
         <p class="text-xs text-ig-subtle">Recommended · one click forever</p>
@@ -196,15 +257,15 @@
     </div>
 
     <!-- post "image" = the draggable zone -->
-    <div class="brand-gradient/5 bg-ig-surface px-4 py-8 grid place-items-center text-center">
-      <p class="text-sm text-ig-subtle mb-4 max-w-xs">Drag this button up to your <b class="text-ig-text">bookmarks bar</b>. Don't click it — drag it.</p>
+    <div class="bg-gray-50 border-y border-gray-100 px-4 py-9 grid place-items-center text-center">
+      <p class="text-sm text-gray-500 mb-4 max-w-xs">Drag this button up to your <b class="text-gray-900">bookmarks bar</b>. Don't click it — drag it.</p>
       <a id="gw-bookmarklet" draggable="true"
          href="javascript:/*!%0A * GhostWatcher %E2%80%94 Instagram Follower Tracker%0A * ------------------------------------------%0A * by Prince Script%0A *%0A * Open-source Instagram tool to find who doesn&#x27;t follow you back,%0A * browse followers, verified &amp; private accounts, and unfollow%0A * safely with human-like rate limiting.%0A *%0A * Usage:%0A *   1. Open instagram.com and log in%0A *   2. Open DevTools Console (F12)%0A *   3. Paste &amp; run the loader, or use the bookmarklet%0A */%0A(async()=&gt;{%22use strict%22;if(window.__ghostWatcherRunning__){const n=document.getElementById(%22__gw_panel__%22);n&amp;&amp;n.remove()}window.__ghostWatcherRunning__=!0;const n=n=&gt;new Promise(e=&gt;setTimeout(e,n)),e=n=&gt;n&gt;0?Math.floor(Math.random()*n):0,t={%22x-ig-app-id%22:%22936619743392459%22},o=%22__gw_style__%22,a=%22__gw_panel__%22,r=n=&gt;[...new Set((n||[]).map(n=&gt;String(n||%22%22).toLowerCase().trim()).filter(Boolean))];function i(){const n=document.getElementById(o);n&amp;&amp;n.remove();const e=document.createElement(%22style%22);e.id=o,e.textContent=`%5Cn      @import url(&#x27;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap&#x27;);%5Cn%5Cn      #${a} {%5Cn        position: fixed;%5Cn        top: 20px;%5Cn        right: 20px;%5Cn        width: 400px;%5Cn        max-height: calc(100vh - 40px);%5Cn        z-index: 2147483647;%5Cn        font-family: &#x27;Inter&#x27;, -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif;%5Cn        background: #ffffff;%5Cn        color: #262626;%5Cn        border: 1px solid #dbdbdb;%5Cn        border-radius: 12px;%5Cn        box-shadow: 0 8px 32px rgba(0,0,0,.18);%5Cn        overflow: hidden;%5Cn        display: flex;%5Cn        flex-direction: column;%5Cn        font-size: 14px;%5Cn        animation: gwSlideIn .3s cubic-bezier(.16,1,.3,1);%5Cn      }%5Cn      @keyframes gwSlideIn {%5Cn        from { opacity: 0; transform: translateY(-12px) scale(.98); }%5Cn        to   { opacity: 1; transform: translateY(0) scale(1); }%5Cn      }%5Cn%5Cn      /* ---- Dark mode (matches IG dark) ---- */%5Cn      #${a}.gw-dark {%5Cn        background: #000000;%5Cn        color: #f5f5f5;%5Cn        border-color: #262626;%5Cn      }%5Cn%5Cn      /* ---- Header ---- */%5Cn      #${a} .gw-head {%5Cn        display: flex;%5Cn        align-items: center;%5Cn        justify-content: space-between;%5Cn        padding: 14px 16px;%5Cn        border-bottom: 1px solid #dbdbdb;%5Cn        background: #fff;%5Cn      }%5Cn      #${a}.gw-dark .gw-head { border-color: #262626; background: #000; }%5Cn%5Cn      #${a} .gw-brand { display: flex; align-items: center; gap: 9px; min-width: 0; }%5Cn      #${a} .gw-logo {%5Cn        width: 30px; height: 30px; flex-shrink: 0;%5Cn        display: flex; align-items: center; justify-content: center;%5Cn        border-radius: 9px;%5Cn        background: radial-gradient(circle at 30%25 107%25, #fdf497 0%25, #fdf497 5%25, #fd5949 45%25, #d6249f 60%25, #285AEB 90%25);%5Cn      }%5Cn      #${a} .gw-logo svg { width: 18px; height: 18px; }%5Cn      #${a} .gw-titles { min-width: 0; }%5Cn      #${a} .gw-title {%5Cn        font-size: 15px; font-weight: 700; letter-spacing: -.2px;%5Cn        line-height: 1.1; white-space: nowrap;%5Cn      }%5Cn      #${a} .gw-sub {%5Cn        font-size: 10px; font-weight: 600; color: #8e8e8e;%5Cn        text-transform: uppercase; letter-spacing: .5px; margin-top: 1px;%5Cn      }%5Cn      #${a} .gw-head-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }%5Cn      #${a} .gw-icon-btn {%5Cn        border: 0; background: transparent; color: #262626;%5Cn        width: 30px; height: 30px; border-radius: 8px; cursor: pointer;%5Cn        display: flex; align-items: center; justify-content: center;%5Cn        font-size: 16px; transition: background .15s;%5Cn      }%5Cn      #${a}.gw-dark .gw-icon-btn { color: #f5f5f5; }%5Cn      #${a} .gw-icon-btn:hover { background: rgba(0,0,0,.06); }%5Cn      #${a}.gw-dark .gw-icon-btn:hover { background: rgba(255,255,255,.1); }%5Cn      #${a} .gw-icon-btn:disabled { opacity: .35; cursor: not-allowed; }%5Cn%5Cn      /* ---- Loading ---- */%5Cn      #${a} .gw-loading { padding: 28px 18px 24px; }%5Cn      #${a} .gw-loading.hidden { display: none; }%5Cn      #${a} .gw-ghost {%5Cn        font-size: 40px; text-align: center; margin-bottom: 14px;%5Cn        animation: gwFloat 2.4s ease-in-out infinite;%5Cn      }%5Cn      @keyframes gwFloat {%5Cn        0%25,100%25 { transform: translateY(0); opacity: .9; }%5Cn        50%25 { transform: translateY(-8px); opacity: 1; }%5Cn      }%5Cn      #${a} .gw-track {%5Cn        height: 4px; border-radius: 999px; overflow: hidden;%5Cn        background: #efefef;%5Cn      }%5Cn      #${a}.gw-dark .gw-track { background: #262626; }%5Cn      #${a} .gw-fill {%5Cn        height: 100%25; width: 0%25; border-radius: 999px;%5Cn        background: linear-gradient(90deg, #d6249f, #285AEB);%5Cn        transition: width .3s ease;%5Cn      }%5Cn      #${a} .gw-load-text {%5Cn        margin-top: 12px; font-size: 13px; color: #8e8e8e; text-align: center;%5Cn      }%5Cn%5Cn      /* ---- Body ---- */%5Cn      #${a} .gw-body {%5Cn        display: flex; flex-direction: column; min-height: 0; flex: 1;%5Cn      }%5Cn      #${a} .gw-body.hidden { display: none; }%5Cn%5Cn      /* ---- Stat strip ---- */%5Cn      #${a} .gw-stats {%5Cn        display: grid; grid-template-columns: repeat(3, 1fr);%5Cn        border-bottom: 1px solid #dbdbdb;%5Cn      }%5Cn      #${a}.gw-dark .gw-stats { border-color: #262626; }%5Cn      #${a} .gw-stat {%5Cn        text-align: center; padding: 12px 6px;%5Cn        border-right: 1px solid #dbdbdb;%5Cn      }%5Cn      #${a}.gw-dark .gw-stat { border-color: #262626; }%5Cn      #${a} .gw-stat:last-child { border-right: 0; }%5Cn      #${a} .gw-stat b { display: block; font-size: 17px; font-weight: 700; }%5Cn      #${a} .gw-stat span { font-size: 11px; color: #8e8e8e; }%5Cn%5Cn      /* ---- Tabs ---- */%5Cn      #${a} .gw-tabs {%5Cn        display: flex; border-bottom: 1px solid #dbdbdb;%5Cn      }%5Cn      #${a}.gw-dark .gw-tabs { border-color: #262626; }%5Cn      #${a} .gw-tab {%5Cn        flex: 1; border: 0; background: transparent; cursor: pointer;%5Cn        padding: 11px 4px 9px; font-size: 11px; font-weight: 600;%5Cn        color: #8e8e8e; border-bottom: 2px solid transparent;%5Cn        transition: color .15s; font-family: inherit;%5Cn        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;%5Cn      }%5Cn      #${a} .gw-tab.active { color: #262626; border-bottom-color: #262626; }%5Cn      #${a}.gw-dark .gw-tab.active { color: #f5f5f5; border-bottom-color: #f5f5f5; }%5Cn%5Cn      /* ---- Search ---- */%5Cn      #${a} .gw-search-wrap { padding: 10px 14px 8px; }%5Cn      #${a} .gw-search {%5Cn        width: 100%25; box-sizing: border-box;%5Cn        padding: 9px 12px; border-radius: 8px;%5Cn        border: 0; background: #efefef; color: #262626;%5Cn        font-size: 13px; font-family: inherit; outline: none;%5Cn      }%5Cn      #${a}.gw-dark .gw-search { background: #1a1a1a; color: #f5f5f5; }%5Cn      #${a} .gw-search::placeholder { color: #8e8e8e; }%5Cn%5Cn      /* ---- Bulk actions ---- */%5Cn      #${a} .gw-actions { display: flex; gap: 7px; padding: 0 14px 10px; }%5Cn      #${a} .gw-actions:empty { display: none; }%5Cn      #${a} .gw-btn {%5Cn        flex: 1; border: 1px solid #dbdbdb; background: #fff; color: #262626;%5Cn        border-radius: 8px; padding: 8px 6px; font-size: 11px; font-weight: 600;%5Cn        cursor: pointer; font-family: inherit; transition: background .15s;%5Cn      }%5Cn      #${a}.gw-dark .gw-btn { background: #000; border-color: #363636; color: #f5f5f5; }%5Cn      #${a} .gw-btn:hover:not(:disabled) { background: #fafafa; }%5Cn      #${a}.gw-dark .gw-btn:hover:not(:disabled) { background: #121212; }%5Cn      #${a} .gw-btn.primary {%5Cn        background: #0095f6; border-color: #0095f6; color: #fff;%5Cn      }%5Cn      #${a} .gw-btn.primary:hover:not(:disabled) { background: #1aa0f7; }%5Cn      #${a} .gw-btn.danger {%5Cn        background: #fff; border-color: #ed4956; color: #ed4956;%5Cn      }%5Cn      #${a}.gw-dark .gw-btn.danger { background: #000; }%5Cn      #${a} .gw-btn.danger:hover:not(:disabled) { background: #fef0f1; }%5Cn      #${a}.gw-dark .gw-btn.danger:hover:not(:disabled) { background: #2a0e10; }%5Cn      #${a} .gw-btn:disabled { opacity: .45; cursor: not-allowed; }%5Cn%5Cn      /* ---- List ---- */%5Cn      #${a} .gw-list {%5Cn        overflow-y: auto; flex: 1; min-height: 120px;%5Cn        max-height: 360px; padding: 0 6px 8px;%5Cn      }%5Cn      #${a} .gw-list::-webkit-scrollbar { width: 8px; }%5Cn      #${a} .gw-list::-webkit-scrollbar-thumb {%5Cn        background: #c7c7c7; border-radius: 999px;%5Cn      }%5Cn      #${a}.gw-dark .gw-list::-webkit-scrollbar-thumb { background: #363636; }%5Cn%5Cn      #${a} .gw-row {%5Cn        display: flex; align-items: center; gap: 11px;%5Cn        padding: 8px 10px; border-radius: 8px; transition: background .12s;%5Cn      }%5Cn      #${a} .gw-row:hover { background: #fafafa; }%5Cn      #${a}.gw-dark .gw-row:hover { background: #121212; }%5Cn%5Cn      #${a} .gw-avatar {%5Cn        width: 36px; height: 36px; border-radius: 50%25; flex-shrink: 0;%5Cn        display: flex; align-items: center; justify-content: center;%5Cn        font-size: 14px; font-weight: 700; color: #fff;%5Cn        text-transform: uppercase;%5Cn      }%5Cn      #${a} .gw-meta { min-width: 0; flex: 1; }%5Cn      #${a} .gw-uname-line { display: flex; align-items: center; gap: 4px; min-width: 0; }%5Cn      #${a} .gw-uname {%5Cn        color: inherit; text-decoration: none; font-weight: 600; font-size: 13px;%5Cn        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;%5Cn      }%5Cn      #${a} .gw-uname:hover { text-decoration: underline; }%5Cn      #${a} .gw-verified { width: 13px; height: 13px; flex-shrink: 0; }%5Cn      #${a} .gw-fullname {%5Cn        font-size: 12px; color: #8e8e8e; overflow: hidden;%5Cn        text-overflow: ellipsis; white-space: nowrap;%5Cn      }%5Cn      #${a} .gw-tag {%5Cn        font-size: 10px; color: #8e8e8e; background: #efefef;%5Cn        padding: 1px 7px; border-radius: 999px; font-weight: 600; flex-shrink: 0;%5Cn      }%5Cn      #${a}.gw-dark .gw-tag { background: #1a1a1a; }%5Cn%5Cn      #${a} .gw-row-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }%5Cn      #${a} .gw-check { width: 16px; height: 16px; accent-color: #0095f6; cursor: pointer; }%5Cn      #${a} .gw-unf {%5Cn        border: 0; background: transparent; color: #0095f6;%5Cn        font-size: 12px; font-weight: 600; cursor: pointer; padding: 4px 2px;%5Cn        font-family: inherit;%5Cn      }%5Cn      #${a} .gw-unf:hover { color: #00376b; }%5Cn      #${a} .gw-unf.done { color: #8e8e8e; cursor: default; }%5Cn      #${a} .gw-unf:disabled { opacity: .5; cursor: not-allowed; }%5Cn%5Cn      #${a} .gw-empty {%5Cn        text-align: center; padding: 40px 20px; color: #8e8e8e; font-size: 13px;%5Cn      }%5Cn%5Cn      /* ---- Footer ---- */%5Cn      #${a} .gw-footer {%5Cn        padding: 10px 14px; border-top: 1px solid #dbdbdb;%5Cn        font-size: 11px; color: #8e8e8e;%5Cn        display: flex; align-items: center; justify-content: space-between; gap: 8px;%5Cn      }%5Cn      #${a}.gw-dark .gw-footer { border-color: #262626; }%5Cn      #${a} .gw-footer-status { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }%5Cn      #${a} .gw-credit { font-weight: 700; color: #d6249f; white-space: nowrap; }%5Cn    `,document.head.appendChild(e)}function l(){const n=document.getElementById(a);if(n)return n;const e=window.matchMedia&amp;&amp;window.matchMedia(%22(prefers-color-scheme: dark)%22).matches,t=document.createElement(%22aside%22);return t.id=a,e&amp;&amp;t.classList.add(%22gw-dark%22),t.innerHTML=&#x27;%5Cn      &lt;div class=%22gw-head%22&gt;%5Cn        &lt;div class=%22gw-brand%22&gt;%5Cn          &lt;div class=%22gw-logo%22&gt;%5Cn            &lt;svg viewBox=%220 0 24 24%22 fill=%22none%22 xmlns=%22http://www.w3.org/2000/svg%22&gt;%5Cn              &lt;path d=%22M12 2C7.6 2 4 5.6 4 10v10.5c0 .6.7 1 1.2.6l1.8-1.4 1.8 1.4c.3.3.8.3 1.2 0l1.8-1.4 1.8 1.4c.3.3.8.3 1.2 0l1.8-1.4 1.8 1.4c.5.4 1.2 0 1.2-.6V10c0-4.4-3.6-8-8-8z%22 fill=%22#fff%22/&gt;%5Cn              &lt;circle cx=%229%22 cy=%2210%22 r=%221.4%22 fill=%22#262626%22/&gt;%5Cn              &lt;circle cx=%2215%22 cy=%2210%22 r=%221.4%22 fill=%22#262626%22/&gt;%5Cn            &lt;/svg&gt;%5Cn          &lt;/div&gt;%5Cn          &lt;div class=%22gw-titles%22&gt;%5Cn            &lt;div class=%22gw-title%22&gt;GhostWatcher&lt;/div&gt;%5Cn            &lt;div class=%22gw-sub%22&gt;by Prince Script&lt;/div&gt;%5Cn          &lt;/div&gt;%5Cn        &lt;/div&gt;%5Cn        &lt;div class=%22gw-head-actions%22&gt;%5Cn          &lt;button class=%22gw-icon-btn gw-theme%22 title=%22Toggle theme%22&gt;%5Cu25d0&lt;/button&gt;%5Cn          &lt;button class=%22gw-icon-btn gw-refresh%22 title=%22Refresh%22&gt;%5Cu21ba&lt;/button&gt;%5Cn          &lt;button class=%22gw-icon-btn gw-close%22 title=%22Close%22&gt;%5Cu2715&lt;/button&gt;%5Cn        &lt;/div&gt;%5Cn      &lt;/div&gt;%5Cn      &lt;div class=%22gw-loading%22&gt;%5Cn        &lt;div class=%22gw-ghost%22&gt;%5Cud83d%5Cudc7b&lt;/div&gt;%5Cn        &lt;div class=%22gw-track%22&gt;&lt;div class=%22gw-fill%22&gt;&lt;/div&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-load-text%22&gt;Preparing%5Cu2026&lt;/div&gt;%5Cn      &lt;/div&gt;%5Cn      &lt;div class=%22gw-body hidden%22&gt;%5Cn        &lt;div class=%22gw-stats%22&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-tabs%22&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-search-wrap%22&gt;&lt;input class=%22gw-search%22 placeholder=%22Search username%5Cu2026%22 /&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-actions%22&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-list%22&gt;&lt;/div&gt;%5Cn        &lt;div class=%22gw-footer%22&gt;%5Cn          &lt;span class=%22gw-footer-status%22&gt;&lt;/span&gt;%5Cn          &lt;span class=%22gw-credit%22&gt;Prince Script&lt;/span&gt;%5Cn        &lt;/div&gt;%5Cn      &lt;/div&gt;%5Cn    &#x27;,t.querySelector(%22.gw-close%22).addEventListener(%22click%22,()=&gt;{t.remove(),window.__ghostWatcherRunning__=!1}),t.querySelector(%22.gw-refresh%22).addEventListener(%22click%22,()=&gt;f()),t.querySelector(%22.gw-theme%22).addEventListener(%22click%22,()=&gt;{t.classList.toggle(%22gw-dark%22)}),document.body.appendChild(t),t}function s(n,e){i();const t=l(),o=t.querySelector(%22.gw-loading%22),a=t.querySelector(%22.gw-body%22);o&amp;&amp;o.classList.remove(%22hidden%22),a&amp;&amp;a.classList.add(%22hidden%22);const r=t.querySelector(%22.gw-fill%22),s=t.querySelector(%22.gw-load-text%22),d=Math.max(0,Math.min(100,Math.floor(n)));r&amp;&amp;(r.style.width=d+%22%25%22),s&amp;&amp;(s.textContent=e)}function d(){const n=document.getElementById(a);if(!n)return;const e=n.querySelector(%22.gw-loading%22);e&amp;&amp;e.classList.add(%22hidden%22)}const c=&#x27;&lt;svg class=%22gw-verified%22 viewBox=%220 0 24 24%22 fill=%22#0095f6%22 xmlns=%22http://www.w3.org/2000/svg%22&gt;&lt;path d=%22M12 1l2.4 2.1 3.1-.5 1.3 2.9 2.9 1.3-.5 3.1L23 12l-2.1 2.4.5 3.1-2.9 1.3-1.3 2.9-3.1-.5L12 23l-2.4-2.1-3.1.5-1.3-2.9L2.3 17l.5-3.1L1 12l2.1-2.4-.5-3.1 2.9-1.3 1.3-2.9 3.1.5L12 1z%22/&gt;&lt;path d=%22M10.3 14.8L7.5 12l1.1-1.1 1.7 1.7 4-4L15.4 9.7l-5.1 5.1z%22 fill=%22#fff%22/&gt;&lt;/svg&gt;&#x27;;async function g(e,o,a=3){let r=0,i=null;for(;r&lt;a;)try{const n=await fetch(%22https://www.instagram.com/api/v1/friendships/%22+e+%22/?%22+o.toString(),{method:%22GET%22,headers:t,credentials:%22include%22}),a=await n.json().catch(()=&gt;({}));if(!n.ok||%22ok%22!==a.status)throw new Error(a&amp;&amp;a.message||%22HTTP %22+n.status);return a}catch(e){i=e,r+=1,r&lt;a&amp;&amp;await n(600*(r+1))}throw new Error(e+%22 failed: %22+(i?.message||%22unknown%22))}async function w(t,o,a,r){const i=[];let l=null,d=0,c=0,w=0;for(;;){const f=new URLSearchParams({count:String(25),search_surface:%22follow_list_page%22});l&amp;&amp;f.set(%22max_id%22,l);const p=await g(o?o+%22/%22+t:t,f),h=Array.isArray(p.users)?p.users:[];if(i.push(...h),w+=h.length,c+=1,l=p.next_max_id||null,s(Boolean(l)?Math.min(r-2,a+5*c):r,%22Loading %22+t+%22 %5Cu2014 %22+w+%22 found%22),!l)break;d+=1,await n(600+e(400)),d%255==0&amp;&amp;await n(3e3+e(400))}return i}async function f(){i();const t=l(),o=t.querySelector(%22.gw-refresh%22),a=t.querySelector(%22.gw-body%22);o&amp;&amp;(o.disabled=!0),a&amp;&amp;a.classList.add(%22hidden%22);try{s(3,%22Starting%5Cu2026%22);const t=await async function(){try{if(window._sharedData?.config?.viewerId)return window._sharedData.config.viewerId}catch{}try{const n=document.cookie.match(/ds_user_id=([^;]+)/);if(n)return n[1]}catch{}return null}(),o=await w(%22followers%22,t,5,49);await n(600+e(400)),s(51,%22Followers loaded. Now following%5Cu2026%22);const a=await w(%22following%22,t,53,98);s(100,%22Done %5Cu2014 rendering%5Cu2026%22);const g={account:window._sharedData?.config?.viewer?.username||(o[0]&amp;&amp;a[0]?%22you%22:%22logged in user%22),followers:r(o.map(n=&gt;n.username)),following:r(a.map(n=&gt;n.username)),followersRaw:o,followingRaw:a};return function(t){i();const o=l(),a=o.querySelector(%22.gw-loading%22),s=o.querySelector(%22.gw-body%22);a&amp;&amp;a.classList.add(%22hidden%22),s&amp;&amp;s.classList.remove(%22hidden%22);const d=r(t.followers),g=r(t.following),w=new Set(d),f=g.filter(n=&gt;!w.has(n)).sort((n,e)=&gt;n.localeCompare(e)),p=new Map((t.followingRaw||[]).filter(n=&gt;n&amp;&amp;n.username&amp;&amp;(n.id||n.pk)).map(n=&gt;[String(n.username).toLowerCase(),String(n.id||n.pk)])),h=new Map,u=new Set,b=new Set;[...t.followersRaw||[],...t.followingRaw||[]].forEach(n=&gt;{if(!n||!n.username)return;const e=String(n.username).toLowerCase();n.full_name&amp;&amp;h.set(e,n.full_name),n.is_private&amp;&amp;u.add(e),n.is_verified&amp;&amp;b.add(e)});const x=[{key:%22nonFollowers%22,label:%22Don&#x27;t follow back%22,list:f},{key:%22followers%22,label:%22Followers%22,list:d},{key:%22following%22,label:%22Following%22,list:g},{key:%22verified%22,label:%22Verified%22,list:[...b].sort((n,e)=&gt;n.localeCompare(e))},{key:%22private%22,label:%22Private%22,list:[...u].sort((n,e)=&gt;n.localeCompare(e))}];o.querySelector(%22.gw-stats%22).innerHTML=`%5Cn      &lt;div class=%22gw-stat%22&gt;&lt;b&gt;${d.length.toLocaleString()}&lt;/b&gt;&lt;span&gt;Followers&lt;/span&gt;&lt;/div&gt;%5Cn      &lt;div class=%22gw-stat%22&gt;&lt;b&gt;${g.length.toLocaleString()}&lt;/b&gt;&lt;span&gt;Following&lt;/span&gt;&lt;/div&gt;%5Cn      &lt;div class=%22gw-stat%22&gt;&lt;b&gt;${f.length.toLocaleString()}&lt;/b&gt;&lt;span&gt;Not back&lt;/span&gt;&lt;/div&gt;%5Cn    `;const m=o.querySelector(%22.gw-tabs%22),v=o.querySelector(%22.gw-search%22),y=o.querySelector(%22.gw-actions%22),k=o.querySelector(%22.gw-list%22),$=o.querySelector(%22.gw-footer-status%22),S=new Set,L=new Set;let _=[],E=!1,C=0,q=%22nonFollowers%22;async function M(n,e){const t=await fetch(%22https://www.instagram.com/web/friendships/%22+n+%22/unfollow/%22,{method:%22POST%22,headers:{%22content-type%22:%22application/x-www-form-urlencoded%22,%22x-csrftoken%22:e},mode:%22cors%22,credentials:%22include%22,body:%22%22}),o=await t.json().catch(()=&gt;({}));if(!t.ok||o&amp;&amp;o.status&amp;&amp;%22ok%22!==o.status)throw new Error(o&amp;&amp;o.message||%22Unfollow failed%22)}async function z(t){const o=[...new Set(t)];if(E||0===o.length)return;const a=function(){const n=document.cookie.match(/(?:^|; )csrftoken=([^;]+)/);return n?decodeURIComponent(n[1]):%22%22}();if(!a)return void($.textContent=%22Missing csrftoken %5Cu2014 refresh Instagram.%22);if(!window.confirm(%22Unfollow %22+o.length+%22 account(s)?%5Cn%5CnThis cannot be undone.%22))return;E=!0,T();let r=0,i=0;const l=[];for(const t of o){const s=p.get(t);if(r+=1,s)try{await M(s,a),S.add(t),L.delete(t),i+=1}catch{L.delete(t),l.push(t)}else l.push(t);$.textContent=%22Unfollowing %22+r+%22/%22+o.length+%22%5Cu2026%22,F(),r&lt;o.length&amp;&amp;(await n(3e3+e(1500)),r%255==0&amp;&amp;await n(15e3+e(1500)))}E=!1,T(),F(),$.textContent=%22Done %5Cu2014 %22+i+%22 unfollowed, %22+l.length+%22 failed%22,l.length&amp;&amp;console.warn(%22[GhostWatcher] Failed:%22,l)}function F(){const n=String(v.value||%22%22).toLowerCase().trim(),e=x.find(n=&gt;n.key===q)||x[0],o=n?e.list.filter(e=&gt;e.includes(n)):e.list;_=o;const a=n?o.length:Math.min(o.length,200),r=o.slice(0,a);if(k.innerHTML=%22%22,0===r.length)return k.innerHTML=&#x27;&lt;div class=%22gw-empty%22&gt;%5Cud83d%5Cudc7b Nothing here&lt;/div&gt;&#x27;,void($.textContent=%22@%22+t.account);const i=document.createDocumentFragment();r.forEach(n=&gt;{const e=document.createElement(%22div%22);e.className=%22gw-row%22;const t=u.has(n),o=b.has(n),a=h.get(n)||%22%22,r=%22nonFollowers%22===q&amp;&amp;p.has(n),l=S.has(n),s=L.has(n)?%22checked%22:%22%22;let d=%22%22;r?d=&#x27;&lt;div class=%22gw-row-actions%22&gt;&#x27;+(l?&#x27;&lt;span class=%22gw-unf done%22&gt;Unfollowed&lt;/span&gt;&#x27;:&#x27;&lt;button class=%22gw-unf%22 data-unfollow=%22&#x27;+n+&#x27;%22&gt;Unfollow&lt;/button&gt;&lt;input type=%22checkbox%22 class=%22gw-check%22 data-select=%22&#x27;+n+&#x27;%22 &#x27;+s+%22 /&gt;%22)+%22&lt;/div&gt;%22:t&amp;&amp;(d=&#x27;&lt;div class=%22gw-row-actions%22&gt;&lt;span class=%22gw-tag%22&gt;Private&lt;/span&gt;&lt;/div&gt;&#x27;),e.innerHTML=&#x27;&lt;div class=%22gw-avatar%22 style=%22background:&#x27;+function(n){const e=[%22#d6249f%22,%22#285AEB%22,%22#fd5949%22,%22#f77737%22,%22#34c759%22,%22#5856d6%22,%22#ff2d55%22,%22#00b8d4%22,%22#7e57c2%22,%22#26a69a%22];let t=0;for(let e=0;e&lt;n.length;e++)t=n.charCodeAt(e)+((t&lt;&lt;5)-t);return e[Math.abs(t)%25e.length]}(n)+&#x27;%22&gt;&#x27;+n.charAt(0)+&#x27;&lt;/div&gt;&lt;div class=%22gw-meta%22&gt;&lt;div class=%22gw-uname-line%22&gt;&lt;a class=%22gw-uname%22 href=%22https://www.instagram.com/&#x27;+n+&#x27;/%22 target=%22_blank%22 rel=%22noreferrer%22&gt;&#x27;+n+%22&lt;/a&gt;%22+(o?c:%22%22)+%22&lt;/div&gt;%22+(a?&#x27;&lt;div class=%22gw-fullname%22&gt;&#x27;+a+%22&lt;/div&gt;%22:%22%22)+%22&lt;/div&gt;%22+d,i.appendChild(e)}),k.appendChild(i),k.querySelectorAll(%22[data-unfollow]%22).forEach(n=&gt;{n.addEventListener(%22click%22,async()=&gt;{const e=n.getAttribute(%22data-unfollow%22);e&amp;&amp;await z([e])})}),k.querySelectorAll(%22[data-select]%22).forEach(n=&gt;{n.addEventListener(%22change%22,n=&gt;{const e=n.target.getAttribute(%22data-select%22);e&amp;&amp;(n.target.checked?L.add(e):L.delete(e),T())})});const l=[...L].filter(n=&gt;p.has(n)&amp;&amp;!S.has(n)).length;$.textContent=%22@%22+t.account+%22 %5Cu2022 %22+r.length+%22/%22+e.list.length+(l?%22 %5Cu2022 %22+l+%22 selected%22:%22%22)+(a&lt;o.length?%22 %5Cu2022 search to see all%22:%22%22)}function T(){if(%22nonFollowers%22!==q)return void(y.innerHTML=%22%22);const n=(_||[]).filter(n=&gt;p.has(n)&amp;&amp;!S.has(n)),e=[...L].filter(n=&gt;p.has(n)&amp;&amp;!S.has(n));y.innerHTML=&#x27;&lt;button class=%22gw-btn%22 data-select-visible&gt;Select all (&#x27;+n.length+&#x27;)&lt;/button&gt;&lt;button class=%22gw-btn%22 data-clear&gt;Clear (&#x27;+e.length+&#x27;)&lt;/button&gt;&lt;button class=%22gw-btn danger%22 data-unfollow-sel&gt;Unfollow (&#x27;+e.length+%22)&lt;/button&gt;%22;const t=y.querySelector(%22[data-select-visible]%22),o=y.querySelector(%22[data-clear]%22),a=y.querySelector(%22[data-unfollow-sel]%22);t.disabled=E||0===n.length,o.disabled=E||0===e.length,a.disabled=E||0===e.length,t.addEventListener(%22click%22,()=&gt;{n.forEach(n=&gt;L.add(n)),T(),F()}),o.addEventListener(%22click%22,()=&gt;{L.clear(),T(),F()}),a.addEventListener(%22click%22,async()=&gt;{await z(e)})}v.addEventListener(%22input%22,()=&gt;{C&amp;&amp;cancelAnimationFrame(C),C=requestAnimationFrame(()=&gt;{F(),T()})}),function n(){m.innerHTML=%22%22,x.forEach(e=&gt;{const t=document.createElement(%22button%22);t.className=%22gw-tab%22+(e.key===q?%22 active%22:%22%22),t.textContent=e.label+%22 (%22+e.list.length+%22)%22,t.title=e.label+%22 (%22+e.list.length+%22)%22,t.addEventListener(%22click%22,()=&gt;{q=e.key,n(),F(),T()}),m.appendChild(t)})}(),F(),T()}(g),setTimeout(d,1e3),console.log(%22[GhostWatcher] Done:%22,{followers:g.followers.length,following:g.following.length}),g}catch(n){s(100,%22Error %5Cu2014 see console%22),console.error(%22[GhostWatcher] Error:%22,n);const e=t.querySelector(%22.gw-load-text%22);e&amp;&amp;(e.textContent=%22%5Cu26a0 %22+(n.message||%22Failed. Are you logged in?%22))}finally{o&amp;&amp;(o.disabled=!1)}}await f()})();"
          onclick="return gwNoClick(event)"
-         class="cursor-grab active:cursor-grabbing select-none inline-flex items-center gap-2 bg-ig-blue text-white font-bold text-base px-7 py-3.5 rounded-xl shadow-lg shadow-ig-blue/40 hover:bg-ig-bluehover transition active:scale-95">
+         class="cursor-grab active:cursor-grabbing select-none inline-flex items-center gap-2 bg-black text-white font-bold text-base px-7 py-3.5 rounded-2xl shadow-lg shadow-black/20 hover:bg-gray-800 transition active:scale-95">
         <span class="text-xl">👻</span> GhostWatcher
       </a>
-      <p class="mt-4 text-[11px] text-ig-subtle">↑ drag me to the bookmarks bar ↑</p>
+      <p class="mt-4 text-[11px] text-gray-400">↑ drag me to the bookmarks bar ↑</p>
     </div>
 
     <!-- post actions + steps -->
@@ -214,22 +275,20 @@
       </div>
       <ol class="text-sm space-y-2 list-decimal list-inside marker:text-ig-subtle marker:font-semibold">
         <li>Show your bookmarks bar — press <kbd class="gw-kbd">Ctrl</kbd>+<kbd class="gw-kbd">Shift</kbd>+<kbd class="gw-kbd">B</kbd> <span class="text-ig-subtle">(⌘+Shift+B on Mac)</span>.</li>
-        <li><b>Drag</b> the blue <b>GhostWatcher</b> button onto that bar.</li>
+        <li><b>Drag</b> the black <b>GhostWatcher</b> button onto that bar.</li>
         <li>Open <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="text-ig-link font-medium hover:underline">instagram.com</a> and log in.</li>
         <li>Click your new <b>GhostWatcher</b> bookmark. The overlay opens. ✨</li>
       </ol>
-      <p class="mt-3 text-xs text-ig-subtle bg-ig-surface rounded-lg px-3 py-2 leading-relaxed">
-        <b class="text-ig-text">Why drag?</b> It copies the whole bookmark perfectly. Pasting long bookmark text can get silently cut off — the usual reason a bookmarklet "doesn't work."
+      <p class="mt-3 text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 leading-relaxed">
+        <b class="text-gray-900">Why drag?</b> It copies the whole bookmark perfectly. Pasting long bookmark text can get silently cut off — the usual reason a bookmarklet "doesn't work."
       </p>
     </div>
   </article>
 
   <!-- ===== METHOD 2: COPY BOOKMARKLET ===== -->
-  <article class="bg-white border border-ig-border rounded-xl overflow-hidden animate-fadeup">
-    <div class="flex items-center gap-3 px-4 py-3 border-b border-ig-border">
-      <div class="w-9 h-9 rounded-full ig-ring p-[2px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center font-bold text-sm">2</div>
-      </div>
+  <article class="bg-white border border-gray-200 rounded-3xl overflow-hidden animate-fadeup shadow-sm">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-100">
+      <div class="w-9 h-9 rounded-xl bg-black grid place-items-center font-bold text-sm text-white shrink-0">2</div>
       <div class="leading-tight">
         <p class="font-semibold text-sm">Copy the bookmarklet</p>
         <p class="text-xs text-ig-subtle">If dragging isn't an option (e.g. mobile)</p>
@@ -243,22 +302,20 @@
         <li>On Instagram, open that bookmark to run GhostWatcher.</li>
       </ol>
       <button onclick="gwCopy('bm')" id="gw-copy-bm"
-        class="w-full bg-ig-text text-white font-semibold text-sm px-4 py-3 rounded-lg hover:opacity-90 transition flex items-center justify-center gap-2">
+        class="w-full bg-black text-white font-semibold text-sm px-4 py-3 rounded-2xl hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
         <svg viewBox="0 0 24 24" width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         <span class="gw-copy-label">Copy bookmarklet</span>
       </button>
-      <p class="mt-3 text-xs text-ig-subtle bg-amber-50 border border-amber-100 rounded-lg px-3 py-2 leading-relaxed">
-        ⚠️ Some browsers trim very long bookmark URLs when pasted. If it doesn't run, use <b class="text-ig-text">Method 1</b> (drag) instead — it never trims.
+      <p class="mt-3 text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 leading-relaxed">
+        ⚠️ Some browsers trim very long bookmark URLs when pasted. If it doesn't run, use <b class="text-gray-900">Method 1</b> (drag) instead — it never trims.
       </p>
     </div>
   </article>
 
   <!-- ===== METHOD 3: FULL CONSOLE PASTE ===== -->
-  <article class="bg-white border border-ig-border rounded-xl overflow-hidden animate-fadeup">
-    <div class="flex items-center gap-3 px-4 py-3 border-b border-ig-border">
-      <div class="w-9 h-9 rounded-full ig-ring p-[2px]">
-        <div class="w-full h-full rounded-full bg-white grid place-items-center font-bold text-sm">3</div>
-      </div>
+  <article class="bg-white border border-gray-200 rounded-3xl overflow-hidden animate-fadeup shadow-sm">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-gray-100">
+      <div class="w-9 h-9 rounded-xl bg-black grid place-items-center font-bold text-sm text-white shrink-0">3</div>
       <div class="leading-tight">
         <p class="font-semibold text-sm">Paste in the console</p>
         <p class="text-xs text-ig-subtle">The classic method · always works</p>
@@ -272,7 +329,7 @@
         <li>Tap <b>Copy full script</b>, paste into the console, press <kbd class="gw-kbd">Enter</kbd>.</li>
       </ol>
       <button onclick="gwCopy('full')" id="gw-copy-full"
-        class="w-full bg-ig-blue text-white font-semibold text-sm px-4 py-3 rounded-lg hover:bg-ig-bluehover transition flex items-center justify-center gap-2">
+        class="w-full bg-black text-white font-semibold text-sm px-4 py-3 rounded-2xl hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
         <svg viewBox="0 0 24 24" width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         <span class="gw-copy-label">Copy full script</span>
       </button>
@@ -287,59 +344,59 @@
 
 <!-- ============ WHAT IT LOOKS LIKE (interface preview) ============ -->
 <section class="max-w-2xl mx-auto px-4 py-8">
-  <h2 class="text-center text-2xl font-bold tracking-tight mb-1">What you'll see</h2>
-  <p class="text-center text-sm text-ig-subtle mb-6">A clean overlay, styled to match Instagram — with tabs for every list.</p>
-  <div class="bg-white border border-ig-border rounded-xl p-4 sm:p-6">
+  <h2 class="text-center text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 mb-2">What you'll see</h2>
+  <p class="text-center text-sm text-gray-500 mb-6">A clean overlay, styled to match Instagram — with tabs for every list.</p>
+  <div class="bg-white border border-gray-200 rounded-3xl shadow-sm p-4 sm:p-6">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-      <div class="bg-ig-surface rounded-lg py-4">
+      <div class="bg-gray-50 rounded-2xl py-5">
         <p class="text-2xl font-bold">1,204</p><p class="text-xs text-ig-subtle">Followers</p>
       </div>
-      <div class="bg-ig-surface rounded-lg py-4">
+      <div class="bg-gray-50 rounded-2xl py-5">
         <p class="text-2xl font-bold">986</p><p class="text-xs text-ig-subtle">Following</p>
       </div>
-      <div class="bg-ig-surface rounded-lg py-4">
+      <div class="bg-gray-50 rounded-2xl py-5">
         <p class="text-2xl font-bold text-rose-500">73</p><p class="text-xs text-ig-subtle">Don't follow back</p>
       </div>
     </div>
     <div class="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-      <span class="px-3 py-1.5 rounded-full bg-ig-text text-white font-medium">Don't follow back</span>
-      <span class="px-3 py-1.5 rounded-full bg-ig-surface border border-ig-border">Followers</span>
-      <span class="px-3 py-1.5 rounded-full bg-ig-surface border border-ig-border">Following</span>
-      <span class="px-3 py-1.5 rounded-full bg-ig-surface border border-ig-border">Verified</span>
-      <span class="px-3 py-1.5 rounded-full bg-ig-surface border border-ig-border">Private</span>
+      <span class="px-3 py-1.5 rounded-full bg-black text-white font-medium">Don't follow back</span>
+      <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700">Followers</span>
+      <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700">Following</span>
+      <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700">Verified</span>
+      <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700">Private</span>
     </div>
     <div class="mt-4 space-y-2">
-      <div class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-ig-surface transition">
+      <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 grid place-items-center text-white font-bold text-sm">A</div>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">ghosted_me</p><p class="text-xs text-ig-subtle truncate">Sam Ghost</p></div>
-        <button class="text-ig-blue text-xs font-semibold">Unfollow</button>
+        <button class="text-gray-500 hover:text-black transition-colors text-xs font-semibold">Unfollow</button>
       </div>
-      <div class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-ig-surface transition">
+      <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition">
         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 grid place-items-center text-white font-bold text-sm">N</div>
         <div class="flex-1 min-w-0"><p class="text-sm font-semibold truncate">never_replies</p><p class="text-xs text-ig-subtle truncate">Alex Quiet</p></div>
-        <button class="text-ig-blue text-xs font-semibold">Unfollow</button>
+        <button class="text-gray-500 hover:text-black transition-colors text-xs font-semibold">Unfollow</button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="max-w-2xl mx-auto px-4 py-8">
-  <h2 class="text-center text-2xl font-bold tracking-tight mb-6">Questions</h2>
+<section id="faq" class="max-w-2xl mx-auto px-4 py-8">
+  <h2 class="text-center text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 mb-6">Questions</h2>
   <div class="space-y-3">
-    <details class="bg-white border border-ig-border rounded-xl px-5 py-4 group">
+    <details class="bg-white border border-gray-200 rounded-2xl px-5 py-4 group">
       <summary class="cursor-pointer font-semibold text-sm flex items-center justify-between select-none">Is it safe? Do you see my password?<span class="text-ig-subtle group-open:rotate-180 transition">▾</span></summary>
       <p class="mt-2 text-sm text-ig-subtle leading-relaxed">GhostWatcher never asks for or sees your password. It runs entirely in your own logged-in browser session and talks only to Instagram. No data is sent anywhere else — there are no servers involved.</p>
     </details>
-    <details class="bg-white border border-ig-border rounded-xl px-5 py-4 group">
+    <details class="bg-white border border-gray-200 rounded-2xl px-5 py-4 group">
       <summary class="cursor-pointer font-semibold text-sm flex items-center justify-between select-none">Can my account get blocked?<span class="text-ig-subtle group-open:rotate-180 transition">▾</span></summary>
       <p class="mt-2 text-sm text-ig-subtle leading-relaxed">Automating actions can violate Instagram's Terms and may trigger temporary action blocks. GhostWatcher paces itself with human-like delays to reduce risk, but you should keep unfollow volumes low and use it at your own risk.</p>
     </details>
-    <details class="bg-white border border-ig-border rounded-xl px-5 py-4 group">
+    <details class="bg-white border border-gray-200 rounded-2xl px-5 py-4 group">
       <summary class="cursor-pointer font-semibold text-sm flex items-center justify-between select-none">Why isn't there a short one-line command?<span class="text-ig-subtle group-open:rotate-180 transition">▾</span></summary>
       <p class="mt-2 text-sm text-ig-subtle leading-relaxed">Instagram's Content-Security-Policy blocks pages from loading external code, so a short link that fetches the script from GitHub gets rejected. The whole tool has to run as one self-contained piece — that's why we use a bookmarklet or a full paste.</p>
     </details>
-    <details class="bg-white border border-ig-border rounded-xl px-5 py-4 group">
+    <details class="bg-white border border-gray-200 rounded-2xl px-5 py-4 group">
       <summary class="cursor-pointer font-semibold text-sm flex items-center justify-between select-none">Does it work on mobile?<span class="text-ig-subtle group-open:rotate-180 transition">▾</span></summary>
       <p class="mt-2 text-sm text-ig-subtle leading-relaxed">It works best on desktop browsers where you have a console and a bookmarks bar. Some mobile browsers support bookmarklets (Method 2), but the experience is smoothest on a computer.</p>
     </details>
@@ -348,23 +405,23 @@
 
 <!-- ============ DISCLAIMER ============ -->
 <section class="max-w-2xl mx-auto px-4 pb-8">
-  <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 text-sm text-amber-900 leading-relaxed">
-    <b>⚠️ Disclaimer.</b> GhostWatcher is an independent, open-source project and is not affiliated with, endorsed by, or connected to Instagram or Meta. Using automation tools may violate Instagram's Terms of Service and could result in temporary restrictions on your account. This software is provided for educational purposes only, with no warranty. Use responsibly and at your own risk.
+  <div class="bg-gray-50 border border-gray-200 rounded-3xl p-5 sm:p-6 text-sm text-gray-500 leading-relaxed">
+    <b class="text-gray-900">⚠️ Disclaimer.</b> GhostWatcher is an independent, open-source project and is not affiliated with, endorsed by, or connected to Instagram or Meta. Using automation tools may violate Instagram's Terms of Service and could result in temporary restrictions on your account. This software is provided for educational purposes only, with no warranty. Use responsibly and at your own risk.
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="border-t border-ig-border bg-white">
-  <div class="max-w-5xl mx-auto px-4 py-8 text-center">
-    <div class="text-3xl mb-2">👻</div>
-    <p class="font-semibold">GhostWatcher</p>
-    <p class="text-xs text-ig-subtle mt-1">Made with 👻 by <span class="brand-text font-semibold">Prince Script</span></p>
-    <div class="mt-4 flex items-center justify-center gap-5 text-sm">
-      <a href="https://github.com/notreallyprince/ghostwatcher" target="_blank" rel="noreferrer" class="text-ig-subtle hover:text-ig-text transition">GitHub</a>
-      <a href="https://github.com/notreallyprince/ghostwatcher/blob/main/LICENSE" target="_blank" rel="noreferrer" class="text-ig-subtle hover:text-ig-text transition">MIT License</a>
-      <a href="#install" class="text-ig-subtle hover:text-ig-text transition">Install</a>
+<footer class="mt-8 border border-gray-200 rounded-3xl bg-gray-50">
+  <div class="max-w-5xl mx-auto px-4 py-10 text-center">
+    <div class="w-12 h-12 mx-auto rounded-2xl brand-gradient grid place-items-center text-2xl shadow-sm">👻</div>
+    <p class="mt-3 font-semibold text-gray-900">GhostWatcher</p>
+    <p class="text-xs text-gray-500 mt-1">Made with 👻 by <span class="font-semibold text-gray-900">Prince Script</span></p>
+    <div class="mt-5 flex items-center justify-center gap-2 text-sm">
+      <a href="https://github.com/notreallyprince/ghostwatcher" target="_blank" rel="noreferrer" class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 hover:border-gray-400 transition font-medium">GitHub</a>
+      <a href="https://github.com/notreallyprince/ghostwatcher/blob/main/LICENSE" target="_blank" rel="noreferrer" class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-gray-700 hover:border-gray-400 transition font-medium">MIT License</a>
+      <a href="#install" class="px-3.5 py-2 rounded-xl bg-black text-white hover:bg-gray-800 transition font-medium">Install</a>
     </div>
-    <p class="mt-5 text-[11px] text-ig-subtle">Not affiliated with Instagram or Meta · © 2025 Prince Script</p>
+    <p class="mt-6 text-[11px] text-gray-400">Not affiliated with Instagram or Meta · © 2025 Prince Script</p>
   </div>
 </footer>
 
